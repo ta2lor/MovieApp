@@ -1,24 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import PropTypes from 'prop-types'
+
+const foodList = [
+  {
+    id : 1,
+    name: "kimchi",
+    image : " https://www.liveeatlearn.com/wp-content/uploads/2019/11/how-to-make-kimchi-vert-500x500.jpg",
+    rating : 4
+  }
+]
+
+function Food(props) {
+  return (
+      <div>
+          <h3>i love {props.name}</h3>
+          <h4>{props.rating}/5</h4>
+          <img src={props.picture} alt={props.name} />
+      </div>
+  )
+}
+
+Food.prototype = {
+  name : PropTypes.string.isRequired,
+  image : PropTypes.string.isRequired,
+  rating : PropTypes.number.isRequired,
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {foodList.map(dish => <Food key={dish.id} name={dish.name} picture={dish.image} rating={dish.rating} />)}
     </div>
   );
 }
